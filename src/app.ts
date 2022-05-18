@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from '../schema/schema';
 import { resolvers } from '../resolver/resolver';
@@ -8,7 +9,13 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer() {
   //creating express app
   const app = express();
+  const corsOptions = {
+    origin: '*',
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  };
   app.use(express.json());
+  app.use(cors(corsOptions));
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
