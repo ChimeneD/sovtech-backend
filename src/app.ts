@@ -10,9 +10,11 @@ async function startApolloServer() {
   //creating express app
   const app = express();
   const corsOptions = {
-    origin: ['*', 'https://sovtech-frontend.netlify.app'],
+    origin: 'https://sovtech-frontend.netlify.app',
+    credentials: true,
   };
   app.use(express.json());
+  app.use(cors(corsOptions));
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
