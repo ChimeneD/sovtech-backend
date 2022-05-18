@@ -9,13 +9,12 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer() {
   //creating express app
   const app = express();
-  const corsOptions = {
-    origin: '*',
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  };
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
   app.use(express.json());
-  app.use(cors(corsOptions));
+  app.use(cors());
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
