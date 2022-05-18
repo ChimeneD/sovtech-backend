@@ -9,6 +9,7 @@ const typeDefs = gql`
     producer: String
     release_date: String
   }
+
   type Person {
     name: String
     height: String
@@ -19,14 +20,23 @@ const typeDefs = gql`
     birth_year: String
     gender: String
     homeworld: String
+    url: String
     films: [Film]
   }
 
+  type AllPeople {
+    count: String
+    next: String
+    previous: String
+    results: [Person]
+  }
+
   type Query {
-    people: [Person]
-    getPerson(id: Int!): Person
+    getPerson(id: ID!): Person
+    getAllPeople: AllPeople
     getPeople: [Person]
-    getNextPage: [Person]
+    getNextPrevPage(url: String!): AllPeople
+    searchPerson(name: String!): [Person]
   }
 `;
 /* 
