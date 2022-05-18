@@ -9,12 +9,12 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer() {
   //creating express app
   const app = express();
-  const corsOptions = {
-    origin: '*',
-    credentials: true,
-  };
   app.use(express.json());
-  app.use(cors(corsOptions));
+  app.use(
+    cors({
+      origin: '*',
+    }),
+  );
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
@@ -31,7 +31,7 @@ async function startApolloServer() {
     },
   });
   await server.start();
-  server.applyMiddleware({ app, cors: corsOptions, path: '/graphql' });
+  server.applyMiddleware({ app, cors: false, path: '/graphql' });
   app.listen(PORT, () => {
     console.log(`🚀 server started on  http://localhost:${PORT}`);
   });
