@@ -9,17 +9,23 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer() {
   //creating express app
   const app = express();
+  app.use(express.static('public'));
   app.use(express.json());
   app.use(
     cors({
       origin: '*',
     }),
   );
+
+  app.get('/', (req, res) => {
+    res.send('/index.html');
+  });
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
     resolvers,
     csrfPrevention: true,
+    //grahpqli: true,
     formatError: (error: any) => {
       return error;
     },
