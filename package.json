@@ -2,7 +2,7 @@
   "name": "sovtech-backend",
   "version": "1.0.0",
   "description": "sovtech test SWAPI graphql server",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "scripts": {
     "start": "node dist/app.js",
     "nodemon": "nodemon app.js",
