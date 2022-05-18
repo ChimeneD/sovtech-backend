@@ -30,7 +30,7 @@ async function startApolloServer() {
     },
   });
   await server.start();
-  server.applyMiddleware({ app, cors: corsOptions, path: '/graphql' });
+  server.applyMiddleware({ app, cors: false, path: '/graphql' });
 
   app.listen(PORT, () => {
     console.log(`🚀 server started on  http://localhost:${PORT}`);
