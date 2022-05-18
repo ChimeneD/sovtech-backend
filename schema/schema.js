@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
-export const typeDefs = gql`
+const typeDefs = gql`
   type Film {
     title: String
     episode_id: Int
@@ -39,3 +39,5 @@ export const typeDefs = gql`
     searchPerson(name: String!): [Person]
   }
 `;
+
+module.exports = typeDefs;
