@@ -1,9 +1,9 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
-const resolvers = {
+export const resolvers = {
   AllPeople: {
-    results: (parent) => {
-      const promises = parent.results.map(async (person) => {
+    results: (parent: any) => {
+      const promises = parent.results.map(async (person: any) => {
         const response = await axios.get(person.url);
         return response.data;
       });
@@ -11,8 +11,8 @@ const resolvers = {
     },
   },
   Person: {
-    films: (parent) => {
-      const promises = parent.films.map(async (url) => {
+    films: (parent: any) => {
+      const promises = parent.films.map(async (url: any) => {
         const response = await axios.get(url);
         return response.data;
       });
@@ -20,7 +20,7 @@ const resolvers = {
     },
   },
   Query: {
-    getPerson: async (_, { id }) => {
+    getPerson: async (_: any, { id }: any) => {
       const response = await axios.get(`${id}`);
       return response.data;
     },
@@ -32,11 +32,11 @@ const resolvers = {
       const response = await axios.get(`https://swapi.dev/api/people`);
       return response.data.results;
     },
-    getNextPrevPage: async (_, { url }) => {
+    getNextPrevPage: async (_: any, { url }: any) => {
       const response = await axios.get(url);
       return response.data;
     },
-    searchPerson: async (_, { name }) => {
+    searchPerson: async (_: any, { name }: any) => {
       const response = await axios.get(
         `https://swapi.dev/api/people/?search=${name}`,
       );
@@ -46,5 +46,3 @@ const resolvers = {
     },
   },
 };
-
-module.exports = resolvers;

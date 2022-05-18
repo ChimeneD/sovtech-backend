@@ -1,9 +1,10 @@
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./schema/schema');
-const resolvers = require('./resolver/resolver');
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { typeDefs } from '../schema/schema';
+import { resolvers } from '../resolver/resolver';
+
 const PORT = process.env.PORT || 4000;
-//https://sovtech-test-backend.herokuapp.com/graphql
+
 async function startApolloServer() {
   //creating express app
   const app = express();
@@ -13,10 +14,9 @@ async function startApolloServer() {
     typeDefs,
     resolvers,
     introspection: true,
-    formatError: (error) => {
+    formatError: (error: any) => {
       return error;
     },
-    graphiql: true,
     context: ({ req, res }) => {
       return {
         req,
