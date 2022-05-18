@@ -10,7 +10,7 @@ async function startApolloServer() {
   //creating express app
   const app = express();
   const corsOptions = {
-    origin: 'https://sovtech-frontend.netlify.app',
+    origin: '*',
     credentials: true,
   };
   app.use(express.json());
