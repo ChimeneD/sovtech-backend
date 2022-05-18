@@ -13,8 +13,13 @@ async function startApolloServer() {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
+  const corsOptions = {
+    origin: 'https://sovtech-frontend.netlify.app',
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  };
   app.use(express.json());
-  app.use(cors());
+  app.use(cors(corsOptions));
   //creating apollo server
   const server = new ApolloServer({
     typeDefs,
