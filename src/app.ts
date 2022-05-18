@@ -19,6 +19,7 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    csrfPrevention: true,
     formatError: (error: any) => {
       return error;
     },
@@ -30,7 +31,7 @@ async function startApolloServer() {
     },
   });
   await server.start();
-  server.applyMiddleware({ app, cors: false, path: '/graphql' });
+  server.applyMiddleware({ app, cors: corsOptions, path: '/graphql' });
   app.listen(PORT, () => {
     console.log(`🚀 server started on  http://localhost:${PORT}`);
   });
