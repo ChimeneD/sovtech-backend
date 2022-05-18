@@ -9,14 +9,8 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer() {
   //creating express app
   const app = express();
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
   const corsOptions = {
     origin: 'https://sovtech-frontend.netlify.app',
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
   };
   app.use(express.json());
   app.use(cors(corsOptions));
