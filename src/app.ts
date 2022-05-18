@@ -10,7 +10,7 @@ async function startApolloServer() {
   //creating express app
   const app = express();
   const corsOptions = {
-    origin: 'https://sovtech-frontend.netlify.app',
+    origin: '*',
   };
   app.use(express.json());
   app.use(cors(corsOptions));
@@ -19,6 +19,7 @@ async function startApolloServer() {
     typeDefs,
     resolvers,
     introspection: true,
+    csrfPrevention: true,
     formatError: (error: any) => {
       return error;
     },
@@ -30,7 +31,7 @@ async function startApolloServer() {
     },
   });
   await server.start();
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app, cors: corsOptions, path: '/graphql' });
 
   app.listen(PORT, () => {
     console.log(`🚀 server started on  http://localhost:${PORT}`);
